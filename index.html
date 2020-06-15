@@ -10,7 +10,7 @@
     console.log("Product name: " + device.productName + ", serial number " + device.serialNumber);
   });
 });
-navigator.usb.requestDevice({ filters: [{ vendorId: BCM2708 }] })
+navigator.usb.requestDevice({ filters: [{ vendorId: 'BCM2708' }] })
 .then(device => {
   console.log(device.productName);      // "Arduino Micro"
   console.log(device.manufacturerName); // "Arduino LLC"
