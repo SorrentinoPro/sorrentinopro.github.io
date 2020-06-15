@@ -1,20 +1,19 @@
-<iframe allowpaymentrequest allow='usb fullscreen'></iframe>
-
-<script>
-    console.log('ss');
-    self.addEventListener('notificationclose', e => console.log(e.notification));
-    navigator.usb.getDevices()
-.then(devices => {
-  console.log("Total devices: " + devices.length);
-  devices.forEach(device => {
-    console.log("Product name: " + device.productName + ", serial number " + device.serialNumber);
-  });
-});
-navigator.usb.requestDevice({ filters: [{ vendorId: 'BCM2708' }] })
-.then(device => {
-  console.log(device.productName);      // "Arduino Micro"
-  console.log(device.manufacturerName); // "Arduino LLC"
-})
-.catch(error => { console.log(error); });
-
-</script>
+<html>
+<body>
+    <button id="usb">Connect to a USB Device</button>
+    <script>
+        document.getElementById('usb').addEventListener('click',function(){
+            if (navigator.usb) {
+                navigator.usb.requestDevice({
+                    filters: []
+                })
+                .then(function(device){
+                    document.body.innerHTML +=
+                        device.manufacturerName + ', ' +
+                        device.productName;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
